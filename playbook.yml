@@ -1,0 +1,31 @@
+- hosts: ubuntu
+# intsall apache for ubuntu
+  tasks:
+    - name: Install apache2 (httpd)
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+# install unzip command
+    - name: install apache unzip
+      apt:
+        name: unzip
+        state: present 
+        update_cache: yes 
+
+# download the template   
+    - name: Unarchive a file that needs to be downloaded 
+      unarchive:
+        src:  https://www.free-css.com/assets/files/free-css-templates/download/page288/digitalex.zip 
+        dest: /tmp/
+        remote_src: yes   
+# move files from tmp to /var/ directory
+    - name: move file from tmp to var folder
+      shell: "rm -rf /var/www/html/* && mv /tmp/digitalex-html/* /var/www/html"
+
+
+
+
+
+ 
+
